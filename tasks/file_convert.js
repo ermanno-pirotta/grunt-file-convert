@@ -36,9 +36,11 @@ module.exports = function(grunt) {
       }).map(function(filepath) {
         // Read file source
         grunt.log.writeln('processing file ' + filepath );
-        grunt.log.debug('file as string = ' + fileStr);
 
+        var fileTransformed = '';
         var fileStr = grunt.file.read(filepath);
+        grunt.log.writeln('file before transformation = ' + fileStr);
+
         var lines = fileStr.split(grunt.util.linefeed);
         var linesToBeProcessed = lines.filter(function(line){
           grunt.log.debug('filtering line = ' + line);
@@ -49,11 +51,7 @@ module.exports = function(grunt) {
           var skipReg = new RegExp(options.skipRegex);
 
           return !skipReg.test(line);
-        });
-
-        var fileTransformed = '';
-
-        linesToBeProcessed.forEach(function(line, index){
+        }).map(function(line, index){
           grunt.log.debug('source file line= ' + line);
             fileTransformed += options.transformer(line, index);
             fileTransformed += grunt.util.linefeed;
@@ -62,7 +60,7 @@ module.exports = function(grunt) {
         return fileTransformed;
       });
 
-      grunt.log.writeln('file after trasformation=' + src);
+      grunt.log.writeln('file after transformation =' + src);
       // Write the destination file.
       grunt.file.write(f.dest, src);
 
