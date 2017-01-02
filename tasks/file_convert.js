@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       skipRegex: undefined,
-      trasform: function(line, index){
+      transformer: function(line, index){
             return line;
       }
     });
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 
         linesToBeProcessed.forEach(function(line, index){
           grunt.log.debug('source file line= ' + line);
-            fileTransformed += options.trasform(line, index);
+            fileTransformed += options.transformer(line, index);
             fileTransformed += grunt.util.linefeed;
         });
 

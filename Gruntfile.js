@@ -52,7 +52,7 @@ module.exports = function(grunt) {
         },
 
         options: {
-          trasform: function(line){
+          transformer: function(line){
               var regex = new RegExp("TO BE TRANSFORMED");
               return line.replace(regex,'TRANSFORMED!!!');
           }
