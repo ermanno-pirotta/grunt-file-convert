@@ -1,7 +1,7 @@
 {
   "name": "grunt-file-convert",
   "description": "Parses a set of input files, applies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://github.com/ermanno-pirotta/grunt-file-convert",
   "author": {
     "name": "Ermanno Pirotta",
