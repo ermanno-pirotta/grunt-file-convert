@@ -30,20 +30,32 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     file_convert: {
-      default_options: {
-        options: {
-        },
+      copy_lines: {
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/copy_lines': ['test/fixtures/input_file_to_be_copied']
+        },
+      },
+
+      remove_lines: {
+        files: {
+          'tmp/remove_lines': ['test/fixtures/input_file_with_lines_to_be_removed']
+        },
+
+        options: {
+            skipRegex: '^\\/\\*.*\\*\/$'
         }
       },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
+
+      trasform_lines: {
         files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/trasform_lines': ['test/fixtures/input_file_to_be_transformed']
+        },
+
+        options: {
+          trasform: function(line){
+              var regex = new RegExp("TO BE TRANSFORMED");
+              return line.replace(regex,'TRANSFORMED!!!');
+          }
         }
       }
     },
