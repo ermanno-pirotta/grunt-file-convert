@@ -13,7 +13,7 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('file_convert', 'Parses a set of input files, applyies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.', function() {
+  grunt.registerMultiTask('file_convert', 'Parses a set of input files, applies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       skipRegex: undefined,
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 
           return !skipReg.test(line);
         }).map(function(line, index){
-          grunt.log.debug('source file line= ' + line);
+            grunt.log.debug('source file line= ' + line);
             fileTransformed += options.transformer(line, index);
             fileTransformed += grunt.util.linefeed;
         });

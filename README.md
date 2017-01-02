@@ -1,6 +1,6 @@
 # grunt-file-convert
 
-> Parses a set of input files, applyies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.
+> Parses a set of input files, applies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
