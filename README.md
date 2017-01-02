@@ -37,47 +37,53 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.skipRegex
 Type: `String`
-Default value: `',  '`
+Default value: undefined
 
-A string value that is used to do something with whatever.
+A string value that is used as a regex to check the lines to be skipped.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.transformer
+Type: `Function`
+Default value: `function(line, index){return line;}`
 
-A string value that is used to do something else with whatever else.
+A function that applies a transformation to each line of the source file.  
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### Skip lines with javascript comments
+In this example, skipRegex option is used to skip all the lines which adheres to the javascript multiline comment format. So if the `source` file has the content `/* asdas */ \n abc` the generated result would be `abc`.
 
 ```js
 grunt.initConfig({
   file_convert: {
-    options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'tmp/remove_lines': ['test/fixtures/input_file_with_lines_to_be_removed']
     },
+
+    options: {
+        skipRegex: '^\\/\\*.*\\*\/$'
+    }
   },
 });
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Apply a custom transformer
+In this example, a custom transformer is used. So if the `source` file has contains the string `TO BE TRANSFORMED` the generated result in this case would be `TRANSFORMED!!!`
 
 ```js
 grunt.initConfig({
   file_convert: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'tmp/trasform_lines': ['test/fixtures/input_file_to_be_transformed']
     },
+
+    options: {
+      transformer: function(line){
+          var regex = new RegExp("TO BE TRANSFORMED");
+          return line.replace(regex,'TRANSFORMED!!!');
+      }
+    }
   },
 });
 ```
