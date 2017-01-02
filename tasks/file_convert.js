@@ -16,8 +16,10 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('file_convert', 'Parses a set of input files, applyies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+      skipRegex: undefined,
+      trasform: function(line, index){
+            return line;
+      }
     });
 
     // Iterate over all specified file groups.
@@ -32,13 +34,35 @@ module.exports = function(grunt) {
           return true;
         }
       }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+        // Read file source
+        grunt.log.writeln('processing file ' + filepath );
+        grunt.log.debug('file as string = ' + fileStr);
 
-      // Handle options.
-      src += options.punctuation;
+        var fileStr = grunt.file.read(filepath);
+        var lines = fileStr.split(grunt.util.linefeed);
+        var linesToBeProcessed = lines.filter(function(line){
+          grunt.log.debug('filtering line = ' + line);
+          if(options.skipRegex === undefined){
+              return line;
+          }
 
+          var skipReg = new RegExp(options.skipRegex);
+
+          return !skipReg.test(line);
+        });
+
+        var fileTransformed = '';
+
+        linesToBeProcessed.forEach(function(line, index){
+          grunt.log.debug('source file line= ' + line);
+            fileTransformed += options.trasform(line, index);
+            fileTransformed += grunt.util.linefeed;
+        });
+
+        return fileTransformed;
+      });
+
+      grunt.log.writeln('file after trasformation=' + src);
       // Write the destination file.
       grunt.file.write(f.dest, src);
 

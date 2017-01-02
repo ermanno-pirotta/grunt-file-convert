@@ -27,22 +27,34 @@ exports.file_convert = {
     // setup here if necessary
     done();
   },
-  default_options: function(test) {
+
+  should_copy_the_file_with_default_trasform_function: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var actual = grunt.file.read('tmp/copy_lines');
+    var expected = grunt.file.read('test/expected/output_file_to_be_copied');
+    test.equal(actual, expected, 'should copy all file lines');
 
     test.done();
   },
-  custom_options: function(test) {
+
+  should_skip_lines_by_pattern: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    var actual = grunt.file.read('tmp/remove_lines');
+    var expected = grunt.file.read('test/expected/output_file_with_lines_to_be_removed');
+    test.equal(actual, expected, 'should skip lines by pattern: ^\\/\\*.*\\*\/$');
 
     test.done();
   },
+
+  should_trasform_lines_with_custom_transformer: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/trasform_lines');
+    var expected = grunt.file.read('test/expected/output_file_to_be_transformed');
+    test.equal(actual, expected, 'should trasform lines with custom transformer');
+
+    test.done();
+  }
 };
