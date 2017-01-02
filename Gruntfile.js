@@ -57,7 +57,19 @@ module.exports = function(grunt) {
               return line.replace(regex,'TRANSFORMED!!!');
           }
         }
-      }
+      },
+
+      prefix_postfix: {
+        files: {
+          'tmp/prefix_postfix': ['test/fixtures/input_file_which_need_prefix']
+        },
+
+        options: {
+          filePrefix: '/*',
+          filePostfix: '*/'
+        }
+      },
+
     },
 
     // Unit tests.

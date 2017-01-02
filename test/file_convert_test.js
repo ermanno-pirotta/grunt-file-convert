@@ -56,5 +56,15 @@ exports.file_convert = {
     test.equal(actual, expected, 'should trasform lines with custom transformer');
 
     test.done();
+  },
+
+  should_add_a_prefix_and_postfix: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/prefix_postfix');
+    var expected = grunt.file.read('test/expected/output_file_which_need_prefix');
+    test.equal(actual, expected, 'should trasform lines with custom transformer');
+
+    test.done();
   }
 };

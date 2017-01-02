@@ -19,13 +19,16 @@ module.exports = function(grunt) {
       skipRegex: undefined,
       transformer: function(line, index){
             return line;
-      }
+      },
+      filePrefix: '',
+      filePostfix: ''
     });
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
       // Concat specified files.
-      var src = f.src.filter(function(filepath) {
+      var src = options.filePrefix;
+      src += f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
@@ -59,6 +62,8 @@ module.exports = function(grunt) {
 
         return fileTransformed;
       });
+
+      src += options.filePostfix;
 
       grunt.log.writeln('file after transformation =' + src);
       // Write the destination file.
