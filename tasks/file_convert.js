@@ -42,7 +42,8 @@ module.exports = function(grunt) {
 
         var fileTransformed = '';
         var fileStr = grunt.file.read(filepath);
-        grunt.log.writeln('file before transformation = ' + fileStr);
+        grunt.log.debug('file before transformation:');
+        grunt.log.debug(fileStr);
 
         var lines = fileStr.split(grunt.util.linefeed);
         var linesToBeProcessed = lines.filter(function(line){
@@ -65,7 +66,8 @@ module.exports = function(grunt) {
 
       src += options.filePostfix;
 
-      grunt.log.writeln('file after transformation =' + src);
+      grunt.log.debug('file after transformation');
+      grunt.log.debug(src);
       // Write the destination file.
       grunt.file.write(f.dest, src);
 
