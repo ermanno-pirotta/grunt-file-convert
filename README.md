@@ -43,6 +43,18 @@ Default value: undefined
 
 A string value that is used as a regex to check the lines to be skipped.
 
+#### options.filePrefix
+Type: `String`
+Default value: ''
+
+A string value that is prepended to the result file.
+
+#### options.filePostfix
+Type: `String`
+Default value: ''
+
+A string value that is appended to the result file.
+
 #### options.transformer
 Type: `Function`
 Default value: `function(line, index){return line;}`
