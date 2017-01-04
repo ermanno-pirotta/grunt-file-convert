@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/ermanno-pirotta/grunt-file-convert.svg?branch=master)](https://travis-ci.org/ermanno-pirotta/grunt-file-convert)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f09e3febfb8a46d7aab2e85574c2b0f8)](https://www.codacy.com/app/ermanno-pirotta/grunt-file-convert?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ermanno-pirotta/grunt-file-convert&amp;utm_campaign=Badge_Grade)
+
 # grunt-file-convert
 
 > Parses a set of input files, applies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.
