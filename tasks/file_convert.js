@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
       // Concat specified files.
-      var src = options.filePrefix;
+      var src = options.filePrefix ? (options.filePrefix + grunt.util.linefeed) : '';
       src += f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
@@ -49,22 +49,28 @@ module.exports = function(grunt) {
         var linesToBeProcessed = lines.filter(function(line){
           grunt.log.debug('filtering line = ' + line);
           if(options.skipRegex === undefined){
-              return line;
+              return true;
           }
 
           var skipReg = new RegExp(options.skipRegex);
 
           return !skipReg.test(line);
-        }).map(function(line, index){
+        });
+
+        var nrOfLines = linesToBeProcessed.length;
+        linesToBeProcessed.map(function(line, index){
             grunt.log.debug('source file line= ' + line);
+
             fileTransformed += options.transformer(line, index);
-            fileTransformed += grunt.util.linefeed;
+            if (nrOfLines !== index + 1) {
+                fileTransformed += grunt.util.linefeed;
+            }
         });
 
         return fileTransformed;
       });
 
-      src += options.filePostfix;
+      src += options.filePostfix ? (grunt.util.linefeed + options.filePostfix) : '';
 
       grunt.log.debug('file after transformation');
       grunt.log.debug(src);
