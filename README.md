@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ermanno-pirotta/grunt-file-convert.svg?branch=master)](https://travis-ci.org/ermanno-pirotta/grunt-file-convert)
+
 # grunt-file-convert
 
 > Parses a set of input files, applies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.
