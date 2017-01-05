@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         grunt.log.writeln('processing file ' + filepath );
 
         var fileTransformed = '';
-        var fileStr = grunt.file.read(filepath);
+        var fileStr = grunt.util.normalizelf(grunt.file.read(filepath));
         grunt.log.debug('file before transformation:');
         grunt.log.debug(fileStr);
 
