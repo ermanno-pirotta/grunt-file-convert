@@ -37,7 +37,7 @@ module.exports = function(grunt) {
         },
       },
 
-      remove_lines: {
+      remove_lines: {
         files: {
           'tmp/remove_lines': ['test/fixtures/input_file_with_lines_to_be_removed']
         },
