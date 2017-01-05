@@ -16,7 +16,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('file_convert', 'Parses a set of input files, applies some custom trasformation to each read line, and writes the result of the trasformation to a set of output files.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      skipRegex: undefined,
+      skipRegex: null,
       transformer: function(line, index){
             return line;
       },
@@ -48,9 +48,10 @@ module.exports = function(grunt) {
         var lines = fileStr.split(grunt.util.linefeed);
         var linesToBeProcessed = lines.filter(function(line){
           grunt.log.debug('filtering line = ' + line);
-          if(options.skipRegex === undefined){
+          if(options.skipRegex === null){
               return true;
           }
+
 
           var skipReg = new RegExp(options.skipRegex);
 
