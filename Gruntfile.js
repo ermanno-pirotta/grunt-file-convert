@@ -71,6 +71,11 @@ module.exports = function(grunt) {
         }
       },
 
+      process_all_lines: {
+        files: {
+          'tmp/process_all_lines': ['test/fixtures/input_file_with_multiple_lines']
+        }
+      }
     },
 
     // Unit tests.

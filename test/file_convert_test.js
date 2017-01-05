@@ -66,5 +66,15 @@ exports.file_convert = {
     test.equal(actual, expected, 'should trasform lines with custom transformer');
 
     test.done();
+  },
+
+  should_process_all_lines: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/process_all_lines');
+    var expected = grunt.file.read('test/expected/output_file_with_multiple_lines');
+    test.equal(actual, expected, 'should process all lines in a file');
+
+    test.done();
   }
 };
